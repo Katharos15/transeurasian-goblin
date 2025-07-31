@@ -5,10 +5,13 @@
 
 # imports
 import pandas as pd
+import sys
 import re
 import csv
 import string
 import shutil
+
+# example: python3 script.py allLanguages.csv koreanic.csv japonic.csv mongolic.csv tungusic.csv turkic.csv consonants_ipa2.txt vowels_ipa2.txt kor-consonants.ipa jap-consonants.ipa mon-consonants.ipa tung-consonants.ipa turk-consonants.ipa kor-vowels.ipa jap-vowels.ipa mon-vowels.ipa tung-vowels.ipa turk-vowels.ipa kor.cog jap.cog mon.cog tung.cog turk.cog
 
 # lowercase all entries in the dataframe
 def lowercase(df):
@@ -49,7 +52,7 @@ def split_into_language_family(input_df, output_file, languages):
     
     df_cleaned.to_csv(output_file, index=False, encoding='utf-8', sep='\t')
 
-# these are the IPA transcription dictionaries
+# IPA transcription dictionaries
 koreanic = {
     'ay': 'ɛ', 'ya': 'ja', 'yay': 'jɛ', 'wa': 'wa', 'way': 'wɛ', 'e': 'ʌ', 'ey': 'e', 'ye': 'jʌ', 
     'yey': 'je', 'we': 'wʌ', 'wey': 'we', 'oy': 'ø', 'yo': 'jo', 'wu': 'u', 'wi': 'y', 'yu': 'ju', 
@@ -270,7 +273,7 @@ def copy_file(current_name, new_name):
 def main(): 
     
     # read in the initial CSV file with all languages
-    csv_file_path = 'allLanguages.csv'
+    csv_file_path = sys.argv[1]
     df = pd.read_csv(csv_file_path, encoding='utf-8', sep='\t')
     
     # lowercase every entry and clean the cells from digits and punctuation
@@ -283,7 +286,7 @@ def main():
     
     # split the language file into the 5 language families
     input_file = pd.read_csv(csv_file_path, encoding='utf-8', sep='\t')
-    output_file = ['Koreanic.csv', 'Japonic.csv', 'Mongolic.csv', 'Tungusic.csv', 'Turkic.csv']
+    output_file = [sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6]]
     language_family = [kor_fam, jap_fam, mon_fam, tung_fam, turk_fam]
     for output, family in zip(output_file, language_family):
         split_into_language_family(input_file, output, family)
@@ -294,13 +297,13 @@ def main():
         transcribe(output, dict_, family)
        
     # create the sound inventory for all 5 language families, 1 consonant file, 1 vowel file
-    consonant_file = ['consonants_ipa2.txt'] * 5
-    vowel_file = ['vowels_ipa2.txt'] * 5
+    consonant_file = [sys.argv[7]] * 5
+    vowel_file = [sys.argv[8]] * 5
     
-    ipa_consonant_file = ['kor-consonants.ipa', 'jap-consonants.ipa', 'mon-consonants.ipa',
-                          'tung-consonants.ipa', 'turk-consonants.ipa']
-    ipa_vowel_file = ['kor-vowels.ipa', 'jap-vowels.ipa', 'mon-vowels.ipa',
-                        'tung-vowels.ipa', 'turk-vowels.ipa']
+    ipa_consonant_file = [sys.argv[9], sys.argv[10], sys.argv[11],
+                          sys.argv[12], sys.argv[13]]
+    ipa_vowel_file = [sys.argv[14], sys.argv[15], sys.argv[16],
+                        sys.argv[17], sys.argv[18]]
 
     # create_sound_inventory(dictionary, output_file, consonant_file, ipa_consonant_file)
     for dict_, output, cons, ipa in zip(dictionary, output_file, consonant_file, ipa_consonant_file):
@@ -322,7 +325,7 @@ def main():
         fill_empty_cells_with_question_mark(output)
     
     # copy the CSV files to new .cog files
-    cog_filename = ['kor.cog', 'jap.cog', 'mon.cog', 'tung.cog', 'turk.cog']
+    cog_filename = [sys.argv[19], sys.argv[20], sys.argv[21], sys.argv[22], sys.argv[23]]
     for output, cog in zip(output_file, cog_filename):
         copy_file(output, cog)
 

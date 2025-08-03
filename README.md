@@ -15,7 +15,7 @@ After every entry has been converted into IPA, the sound inventory of each langu
 ### Step 3
 transeurasian-script.py runs all the steps mentions in Step 2, but keeps all languages in one CSV file and in one Transeurasian .cog file. This is for reconstructing a Transeurasian ancestor language.
 ### Step 3
-sample-file-extractor.py extracts all entries of a specified Glottolog ID from a log file.
+sample-file-extractor.py and transeurasian-sample-file-extractor.py extract all entries of a specified Glottolog ID from a log file into a txt file.
 ### Step 4
 parse-sample-combine-substrings.py generates the best reconstruction for the samples of an ID.
 

@@ -12,15 +12,15 @@ Next, it will remove all digits and punctuation as well as create IDs for the 'M
 After this small cleaning session the script splits the cognate CSV file into five separate CSV files (Turkic, Mongolic, Tungusic, Koreanic, Japonic).\
 Next, the script will convert every entry in each cognate CSV file (Turkic, Mongolic, Tungusic, Koreanic, Japonic) into their International Phonetic Alphabet (IPA) variant.\
 After every entry has been converted into IPA, the sound inventory of each language family is created.
-### Step ...
-transeurasian-script.py runs all the steps mentions in Step 2, but keeping all languages in one CSV file and in one Transeurasian .cog file. This is for reconstructing a Transeurasian ancestor language.
-### Step ...
+### Step 3
+transeurasian-script.py runs all the steps mentions in Step 2, but keeps all languages in one CSV file and in one Transeurasian .cog file. This is for reconstructing a Transeurasian ancestor language.
+### Step 3
 sample-file-extractor.py extracts all entries of a specified Glottolog ID from a log file.
-### Step ...
+### Step 4
 parse_sample_combine_substrings.py generates the best reconstruction for the samples of an ID.
 
 
-### Add On
+### Add On to Step 2
 file path: python3 script.py\
 sys.argv[0] = this python file\
 sys.argv[1] = csv_file_path allLanguages.csv\
